@@ -1,5 +1,7 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, } from '@ionic/angular';
+import { menuController } from '@ionic/core';
+
 
 @Component({
   selector: 'app-tabs',
@@ -12,4 +14,10 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor() {}
+
+  
+  openMenu = async () => {
+    menuController.open();
+  }
+
 }

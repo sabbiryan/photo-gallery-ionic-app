@@ -1,4 +1,4 @@
-import { Component, EnvironmentInjector, inject } from '@angular/core';
+import { Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
@@ -9,8 +9,32 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [IonicModule, CommonModule],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);
 
-  constructor() {}
+  public selectedIndex = 0;
+  public appPages = [
+    {
+      title: 'Home',
+      url: '/tabs',
+      icon: 'home'
+    },
+    {
+      title: 'Inbox',
+      url: '/inbox',
+      icon: 'mail'
+    }
+  ];
+
+  constructor() {
+    //SplashScreen.hide();
+  }
+
+  ngOnInit() {
+    const path = window.location.pathname.split('/')[1];
+    console.log(path)
+    if (path !== undefined) {
+      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+    }
+  }
 }
